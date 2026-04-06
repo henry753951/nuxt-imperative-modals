@@ -80,7 +80,9 @@ export default defineNuxtModule<ModuleOptions>({
       resolve(nuxt.options.srcDir, dirRelativeToSrc),
       resolve(nuxt.options.rootDir, normalizedDir),
     ];
-    const modalDir = candidateDirs.find((dir) => existsSync(dir)) ?? candidateDirs[0];
+    const modalDir =
+      candidateDirs.find((dir) => existsSync(dir)) ??
+      resolve(nuxt.options.srcDir, dirRelativeToSrc);
     const importBase = dirRelativeToSrc;
 
     addImportsDir(resolver.resolve("./runtime/composables"));
@@ -116,8 +118,9 @@ export default defineNuxtModule<ModuleOptions>({
     const formatModalName = (filePath: string) => {
       const relPath = relative(modalDir, filePath);
       const { dir, name } = parse(relPath);
-      const cleanName = name.replace(/modal$/i, "");
-      const segments = [...dir.split(/[\\/]/), cleanName].filter(Boolean).map(toPascalCase);
+      const cleanName = (name ?? "").replace(/modal$/i, "");
+      const dirSegments = dir ? dir.split(/[\\/]/) : [];
+      const segments = [...dirSegments, cleanName].filter(Boolean).map(toPascalCase);
       return `${segments.join("")}Modal`;
     };
 

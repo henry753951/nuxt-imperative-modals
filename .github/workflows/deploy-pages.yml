@@ -45,6 +45,7 @@ jobs:
         run: |
           bun run lint
           bun run test
+          bunx nuxi typecheck playground
 
       - name: Generate playground
         env:

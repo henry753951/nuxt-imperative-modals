@@ -427,7 +427,7 @@ watch(
           </div>
         </div>
 
-        <div class="relative mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)]">
+        <div class="relative mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,430px)]">
           <div class="space-y-8">
             <div class="space-y-5">
               <p class="text-xs font-semibold tracking-[0.34em] text-slate-500 uppercase">
@@ -554,7 +554,7 @@ watch(
           </div>
 
           <aside
-            class="relative overflow-hidden rounded-[30px] bg-slate-950 p-5 text-slate-50 shadow-[0_30px_90px_-42px_rgba(15,23,42,0.85)]"
+            class="relative mx-auto w-full max-w-[430px] overflow-hidden rounded-[30px] bg-slate-950 p-5 text-slate-50 shadow-[0_30px_90px_-42px_rgba(15,23,42,0.85)] lg:mx-0"
           >
             <div
               class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
@@ -575,7 +575,7 @@ watch(
                   </div>
                 </div>
 
-                <div class="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                <div class="mt-5 grid gap-4">
                   <div class="rounded-[22px] border border-white/10 bg-black/20 p-4">
                     <div class="text-[11px] tracking-[0.26em] text-slate-500 uppercase">
                       {{ t("playground.panel.lastResultLabel") }}
@@ -591,7 +591,7 @@ watch(
                       {{ t("playground.panel.titleTypedName") }}
                     </div>
                     <div
-                      class="mt-3 rounded-2xl border border-emerald-400/15 bg-emerald-500/10 px-4 py-4 font-mono text-sm leading-7 text-emerald-200"
+                      class="mt-3 rounded-2xl border border-emerald-400/15 bg-emerald-500/10 px-4 py-4 font-mono text-sm leading-7 break-all text-emerald-200"
                     >
                       {{ t("playground.panel.typedModalName") }}
                     </div>
@@ -632,18 +632,32 @@ watch(
                 </ul>
               </div>
 
-              <div class="grid gap-3 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                <article
-                  v-for="card in featureCards"
-                  :key="card.title"
-                  class="rounded-[22px] border border-white/10 bg-white/5 p-4"
-                >
-                  <div class="text-[11px] font-semibold tracking-[0.24em] text-slate-400 uppercase">
-                    {{ card.eyebrow }}
-                  </div>
-                  <h2 class="mt-3 text-base font-semibold text-white">{{ card.title }}</h2>
-                  <p class="mt-2 text-sm leading-6 text-slate-300">{{ card.body }}</p>
-                </article>
+              <div class="rounded-[24px] border border-white/10 bg-white/5 p-5">
+                <div class="text-xs tracking-[0.3em] text-slate-400 uppercase">
+                  {{ t("playground.hero.docsTitle") }}
+                </div>
+                <div class="mt-4 grid gap-3">
+                  <article
+                    v-for="(card, index) in featureCards"
+                    :key="card.title"
+                    class="flex items-start gap-4 rounded-[20px] border border-white/10 bg-black/20 px-4 py-4"
+                  >
+                    <div
+                      class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-slate-200"
+                    >
+                      {{ index + 1 }}
+                    </div>
+                    <div class="min-w-0">
+                      <div
+                        class="text-[11px] font-semibold tracking-[0.24em] text-slate-400 uppercase"
+                      >
+                        {{ card.eyebrow }}
+                      </div>
+                      <h2 class="mt-2 text-base font-semibold text-white">{{ card.title }}</h2>
+                      <p class="mt-2 text-sm leading-6 text-slate-300">{{ card.body }}</p>
+                    </div>
+                  </article>
+                </div>
               </div>
             </div>
           </aside>

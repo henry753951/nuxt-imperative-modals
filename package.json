@@ -31,7 +31,7 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "prepack": "nuxt-module-build build",
-    "test": "vitest run",
+    "test": "bunx nuxi prepare playground && vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {

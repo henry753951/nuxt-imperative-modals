@@ -38,6 +38,7 @@ jobs:
         run: |
           bun run lint
           bun run test
+          bunx nuxi typecheck playground
           bun run build
 
       - name: Publish to npm
