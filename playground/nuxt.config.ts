@@ -12,7 +12,12 @@ export default defineNuxtConfig({
     defaultLocale: "zh-TW",
     langDir: "locales",
     locales: [
-      { code: "zh-TW", file: "zh-TW.ts", language: "zh-TW", name: "繁體中文" },
+      {
+        code: "zh-TW",
+        file: "zh-TW.ts",
+        language: "zh-TW",
+        name: "繁體中文",
+      },
       { code: "en", file: "en.ts", language: "en-US", name: "English" },
     ],
     strategy: "no_prefix",
@@ -20,5 +25,8 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/i18n", "../src/module"],
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ["@vue/devtools-core", "@vue/devtools-kit"],
+    },
   },
 });

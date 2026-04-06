@@ -12,10 +12,10 @@
 - `app/modals` 內的元件自動註冊為全域元件
 - 執行時元件名稱格式：`Modals${ModalName}`
 - 從 modal 元件推導型別：
-   - `ModalName`
-   - `ModalsPropsTypeMap`
-   - `ModalsEmitTypeMap`
-   - `ModalsSlotsTypeMap`
+  - `ModalName`
+  - `ModalsPropsTypeMap`
+  - `ModalsEmitTypeMap`
+  - `ModalsSlotsTypeMap`
 
 - 內建 `<ModalsContainer />` 容器元件
 - 提供 `playground/` 範例應用

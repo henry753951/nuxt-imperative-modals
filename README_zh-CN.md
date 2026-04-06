@@ -12,10 +12,10 @@
 - `app/modals` 目录下组件自动注册为全局组件
 - 运行时组件命名规则：`Modals${ModalName}`
 - 从 modal 组件中推导类型：
-   - `ModalName`
-   - `ModalsPropsTypeMap`
-   - `ModalsEmitTypeMap`
-   - `ModalsSlotsTypeMap`
+  - `ModalName`
+  - `ModalsPropsTypeMap`
+  - `ModalsEmitTypeMap`
+  - `ModalsSlotsTypeMap`
 
 - 内置 `<ModalsContainer />` 容器组件
 - 提供 `playground/` 示例应用
