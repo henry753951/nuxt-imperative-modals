@@ -2,13 +2,13 @@
   "name": "nuxt-imperative-modals",
   "version": "0.1.0",
   "description": "Imperative modal orchestration for Nuxt with generated modal prop and emit types.",
-  "homepage": "https://github.com/your-org/nuxt-imperative-modals#readme",
+  "homepage": "https://github.com/henry753951/nuxt-imperative-modals#readme",
   "bugs": {
-    "url": "https://github.com/your-org/nuxt-imperative-modals/issues"
+    "url": "https://github.com/henry753951/nuxt-imperative-modals/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/nuxt-imperative-modals.git"
+    "url": "git+https://github.com/henry753951/nuxt-imperative-modals.git"
   },
   "license": "MIT",
   "sideEffects": false,
