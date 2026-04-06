@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "style": "warn"
+  },
+  "plugins": ["typescript", "vitest"],
+  "ignorePatterns": ["dist/**", ".nuxt/**", ".output/**", "node_modules/**"],
+  "rules": {
+    "eslint-plugin-jest/require-hook": "off",
+    "eslint-plugin-vitest/no-importing-vitest-globals": "off",
+    "eslint/arrow-body-style": "off",
+    "eslint/id-length": "off",
+    "eslint/max-statements": "off",
+    "eslint/no-magic-numbers": "off",
+    "eslint/no-ternary": "off",
+    "eslint/sort-imports": "off",
+    "eslint/sort-keys": "off"
+  }
+}
