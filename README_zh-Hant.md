@@ -1,4 +1,4 @@
-# nuxt-imperative-modals
+# @henry753951/nuxt-imperative-modals
 
 [English](README.md) | [Chinese](README_zh-CN.md) | [Traditional Chinese](README_zh-Hant.md)
 
@@ -26,14 +26,20 @@
 ## 安裝
 
 ```bash
-bun add nuxt-imperative-modals
+bun add @henry753951/nuxt-imperative-modals
+```
+
+如果要從 GitHub Packages 安裝，請先加入 `.npmrc`：
+
+```ini
+@henry753951:registry=https://npm.pkg.github.com
 ```
 
 在 `nuxt.config.ts` 註冊模組：
 
 ```ts
 export default defineNuxtConfig({
-   modules: ["nuxt-imperative-modals"],
+   modules: ["@henry753951/nuxt-imperative-modals"],
 });
 ```
 
@@ -265,7 +271,7 @@ bun run dev
 
 ```ts
 export default defineNuxtConfig({
-   modules: ["nuxt-imperative-modals"],
+   modules: ["@henry753951/nuxt-imperative-modals"],
    imperativeModals: {
       dir: "app/modals",
       componentPrefix: "Modals",
