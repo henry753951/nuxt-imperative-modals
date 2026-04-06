@@ -19,6 +19,8 @@ interface AlertPayload {
   details: string | null;
 }
 
+type HelperExtraProps = Record<string, unknown>;
+
 export const useModals = () => {
   const modals = useState<ModalInstance[]>("modals", () => []);
 
@@ -34,7 +36,7 @@ export const useModals = () => {
       if (existingModal) {
         existingModal.isOpen = true;
         existingModal.props = options?.props ?? {};
-        existingModal.resolve = resolve;
+        existingModal.resolve = resolve as (value: unknown) => void;
         return;
       }
 
@@ -43,7 +45,7 @@ export const useModals = () => {
         modalName: fullModalName,
         isOpen: true,
         props: options?.props ?? {},
-        resolve,
+        resolve: resolve as (value: unknown) => void,
       });
     });
   };
@@ -67,14 +69,19 @@ export const useModals = () => {
     }, 100);
   };
 
-  const alert = (title: string, description?: string, error?: AlertPayload) =>
+  const alert = (
+    title: string,
+    description?: string,
+    error?: AlertPayload,
+    extraProps?: HelperExtraProps,
+  ) =>
     open("AlertModal" as ModalName, {
-      props: { title, description, error } as Record<string, unknown>,
+      props: { ...extraProps, title, description, error } as Record<string, unknown>,
     }) as Promise<void>;
 
-  const confirm = (title: string, description?: string) =>
+  const confirm = (title: string, description?: string, extraProps?: HelperExtraProps) =>
     open("ConfirmModal" as ModalName, {
-      props: { title, description } as Record<string, unknown>,
+      props: { ...extraProps, title, description } as Record<string, unknown>,
     }) as Promise<boolean>;
 
   return {

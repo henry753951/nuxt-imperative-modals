@@ -5,7 +5,11 @@ const { modals, close } = useModals();
 </script>
 
 <template>
-  <div id="modals-container" class="pointer-events-none fixed inset-0 z-50">
+  <div
+    v-if="modals.length > 0"
+    id="modals-container"
+    class="pointer-events-none fixed inset-0 z-50"
+  >
     <template v-for="modal in modals" :key="modal.id">
       <component
         :is="modal.modalName"

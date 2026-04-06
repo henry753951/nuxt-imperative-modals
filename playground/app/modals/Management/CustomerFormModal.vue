@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n();
+
 const props = defineProps<{
   customerId: string;
   customerName: string;
@@ -18,7 +20,7 @@ const emit = defineEmits<{
 <template>
   <div
     v-if="open"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm"
+    class="pointer-events-auto fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm"
   >
     <div
       class="w-full max-w-2xl overflow-hidden rounded-[32px] border border-fuchsia-200 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.65)]"
@@ -28,7 +30,7 @@ const emit = defineEmits<{
       >
         <div class="space-y-3 border-b border-fuchsia-100 px-6 py-6 md:border-r md:border-b-0">
           <div class="text-xs font-semibold tracking-[0.24em] text-fuchsia-700 uppercase">
-            Props passed in
+            {{ t("modals.customer.propsTitle") }}
           </div>
           <div
             class="rounded-2xl border border-white/70 bg-white/80 p-4 font-mono text-sm text-slate-700"
@@ -37,13 +39,13 @@ const emit = defineEmits<{
             <div class="mt-1">customerName: "{{ props.customerName }}"</div>
           </div>
           <p class="text-sm leading-6 text-slate-600">
-            These values came from <code>open("ManagementCustomerFormModal", { props })</code>.
+            {{ t("modals.customer.propsText") }}
           </p>
         </div>
 
         <div class="space-y-3 px-6 py-6">
           <div class="text-xs font-semibold tracking-[0.24em] text-fuchsia-700 uppercase">
-            Result emitted out
+            {{ t("modals.customer.resultTitle") }}
           </div>
           <div
             class="rounded-2xl border border-white/70 bg-white/80 p-4 font-mono text-sm text-slate-700"
@@ -51,15 +53,16 @@ const emit = defineEmits<{
             { customerId, customerName, saved }
           </div>
           <p class="text-sm leading-6 text-slate-600">
-            The second argument of <code>emit("close", result)</code> becomes the resolved value of
-            the returned promise.
+            {{ t("modals.customer.resultText") }}
           </p>
         </div>
       </div>
 
       <div class="space-y-6 px-6 py-6">
         <div>
-          <label class="text-sm font-medium text-slate-700">Customer name</label>
+          <label class="text-sm font-medium text-slate-700">
+            {{ t("modals.customer.inputLabel") }}
+          </label>
           <input
             v-model="draftName"
             class="mt-2 w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-fuchsia-400"
@@ -67,7 +70,9 @@ const emit = defineEmits<{
         </div>
 
         <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-          <div class="text-sm font-medium text-slate-900">Resolved payload preview</div>
+          <div class="text-sm font-medium text-slate-900">
+            {{ t("modals.customer.payloadPreview") }}
+          </div>
           <pre
             class="mt-2 overflow-x-auto text-sm leading-6 text-slate-600"
           ><code>{{ JSON.stringify({ customerId: props.customerId, customerName: draftName, saved: true }, null, 2) }}</code></pre>
@@ -85,7 +90,7 @@ const emit = defineEmits<{
             })
           "
         >
-          Close without saving
+          {{ t("modals.customer.close") }}
         </button>
         <button
           class="rounded-full bg-slate-950 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800"
@@ -97,7 +102,7 @@ const emit = defineEmits<{
             })
           "
         >
-          Save and close
+          {{ t("modals.customer.save") }}
         </button>
       </div>
     </div>

@@ -12,6 +12,7 @@
     "eslint-plugin-vitest/no-importing-vitest-globals": "off",
     "eslint/arrow-body-style": "off",
     "eslint/id-length": "off",
+    "eslint/max-params": "off",
     "eslint/max-statements": "off",
     "eslint/no-magic-numbers": "off",
     "eslint/no-ternary": "off",
