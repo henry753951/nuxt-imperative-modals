@@ -2,25 +2,34 @@
 
 [English](README.md) | [Chinese](README_zh-CN.md) | [Traditional Chinese](README_zh-Hant.md)
 
-Imperative modal orchestration for Nuxt. The module scans `app/modals`, registers those components globally with a `Modals` prefix, and generates prop and emit typings for `useModals()`.
+用于 Nuxt 的命令式（imperative）Modal 管理模块。该模块会扫描 `app/modals` 目录，将其中的组件自动注册为全局组件（带 `Modals` 前缀），并为 `useModals()` 生成对应的 props 和 emit 类型。
 
-## What it gives you
+---
 
-- `useModals()` auto-imported from the module.
-- `app/modals` auto-registered as global components.
-- Runtime component names follow `Modals${ModalName}`.
-- Generated `ModalName`, `ModalsPropsTypeMap`, `ModalsEmitTypeMap`, and `ModalsSlotsTypeMap` from your modal files.
-- A built-in `<ModalsContainer />` component.
-- A `playground/` app for local verification.
-- A `test/` suite for basic module integration coverage.
+## 功能
 
-## Install
+- 自动提供 `useModals()`（无需手动导入）
+- `app/modals` 目录下组件自动注册为全局组件
+- 运行时组件命名规则：`Modals${ModalName}`
+- 从 modal 组件中推导类型：
+   - `ModalName`
+   - `ModalsPropsTypeMap`
+   - `ModalsEmitTypeMap`
+   - `ModalsSlotsTypeMap`
+
+- 内置 `<ModalsContainer />` 容器组件
+- 提供 `playground/` 示例应用
+- 提供 `test/` 基础集成测试
+
+---
+
+## 安装
 
 ```bash
 bun add nuxt-imperative-modals
 ```
 
-Then register the module in `nuxt.config.ts`:
+在 `nuxt.config.ts` 中注册模块：
 
 ```ts
 export default defineNuxtConfig({
@@ -28,9 +37,11 @@ export default defineNuxtConfig({
 });
 ```
 
-## Usage
+---
 
-Create modals under `app/modals`:
+## 使用方式
+
+在 `app/modals` 下创建 modal：
 
 ```text
 app/
@@ -41,7 +52,7 @@ app/
       CustomerFormModal.vue
 ```
 
-Put the container in a layout or in `app.vue`:
+在 layout 或 `app.vue` 中放置容器：
 
 ```vue
 <template>
@@ -52,9 +63,11 @@ Put the container in a layout or in `app.vue`:
 </template>
 ```
 
-## Quick example
+---
 
-Open a modal imperatively and await the result:
+## 快速示例
+
+通过命令式方式打开 modal，并等待返回结果：
 
 ```ts
 const { open, confirm, alert } = useModals();
@@ -73,23 +86,25 @@ const result = await open("ManagementCustomerFormModal", {
 });
 ```
 
-## How naming works
+---
 
-- `app/modals/AlertModal.vue` becomes `open("AlertModal")`
-- `app/modals/Management/CustomerFormModal.vue` becomes `open("ManagementCustomerFormModal")`
-- At runtime the rendered global component name is prefixed as `Modals...`
+## 命名规则
 
-Examples:
+- `app/modals/AlertModal.vue` → `open("AlertModal")`
+- `app/modals/Management/CustomerFormModal.vue` → `open("ManagementCustomerFormModal")`
 
-- `app/modals/AlertModal.vue` -> `ModalsAlertModal`
-- `app/modals/Management/CustomerFormModal.vue` -> `ModalsManagementCustomerFormModal`
+运行时实际渲染的组件名称会带前缀：
 
-## Passing props into a modal
+- `AlertModal` → `ModalsAlertModal`
+- `ManagementCustomerFormModal` → `ModalsManagementCustomerFormModal`
 
-The `props` object is inferred from the Vue props type of the modal component.
+---
+
+## 传递 props
+
+`props` 会根据 modal 组件的类型自动推导：
 
 ```vue
-<!-- app/modals/Management/CustomerFormModal.vue -->
 <script setup lang="ts">
 defineProps<{
    customerId: string;
@@ -110,13 +125,13 @@ await open("ManagementCustomerFormModal", {
 });
 ```
 
-If you pass the wrong prop name or type, TypeScript should flag it.
+如果传入错误的 prop 名称或类型，TypeScript 会提示错误。
 
-## Returning values from a modal
+---
 
-The result type comes from the second argument of the modal's `close` emit.
+## 从 modal 返回数据
 
-In your modal component, emit `close` and pass the return value as the second argument:
+返回值类型来自 modal 的 `close` emit 第二个参数：
 
 ```vue
 <script setup lang="ts">
@@ -132,7 +147,7 @@ const emit = defineEmits<{
 </template>
 ```
 
-Then `open()` resolves to that payload:
+调用方可以获取该结果：
 
 ```ts
 const result = await open("ManagementCustomerFormModal", {
@@ -146,14 +161,15 @@ result.saved;
 result.customerId;
 ```
 
-## `alert()` helper
+---
 
-`alert()` is a convenience wrapper around `open("AlertModal")`.
+## `alert()`
 
-Expected modal:
+`alert()` 是 `open("AlertModal")` 的简化封装。
+
+预期 modal：
 
 ```vue
-<!-- app/modals/AlertModal.vue -->
 <script setup lang="ts">
 defineProps<{
    description?: string;
@@ -167,7 +183,7 @@ const emit = defineEmits<{
 </script>
 ```
 
-Usage:
+使用方式：
 
 ```ts
 const { alert } = useModals();
@@ -175,16 +191,15 @@ const { alert } = useModals();
 await alert("Draft saved", "Your changes were stored successfully.");
 ```
 
-`alert()` resolves when the modal closes.
+modal 关闭后，Promise 会 resolve。
 
-## `confirm()` helper
+---
 
-`confirm()` is a convenience wrapper around `open("ConfirmModal")` and expects the modal to emit a boolean.
+## `confirm()`
 
-Expected modal:
+`confirm()` 是 `open("ConfirmModal")` 的简化封装，返回 boolean：
 
 ```vue
-<!-- app/modals/ConfirmModal.vue -->
 <script setup lang="ts">
 defineProps<{
    description?: string;
@@ -198,8 +213,6 @@ const emit = defineEmits<{
 </script>
 ```
 
-Usage:
-
 ```ts
 const { confirm } = useModals();
 
@@ -209,9 +222,9 @@ const accepted = await confirm(
 );
 ```
 
-`accepted` is inferred as `boolean`.
+---
 
-## Full custom flow
+## 自定义流程
 
 ```ts
 const { open } = useModals();
@@ -229,24 +242,28 @@ if (result.saved) {
 }
 ```
 
+---
+
 ## Playground
 
-Run the demo app:
+运行示例应用：
 
 ```bash
 bun run dev
 ```
 
-The playground demonstrates:
+示例内容包括：
 
 - `alert(title, description)`
 - `confirm(title, description)`
 - `open(modalName, { props })`
-- emitting a typed result payload from `close`
-- the generated modal-name convention from nested `app/modals` paths
-- Tailwind CSS v4 styling wired through the playground's Nuxt config
+- 类型化的 `close` 返回数据
+- 基于嵌套路径生成的命名规则
+- 与 Tailwind CSS v4 的集成示例
 
-## Module options
+---
+
+## 模块选项
 
 ```ts
 export default defineNuxtConfig({
@@ -258,7 +275,9 @@ export default defineNuxtConfig({
 });
 ```
 
-## Local development
+---
+
+## 本地开发
 
 ```bash
 bun install
@@ -269,8 +288,7 @@ bun run test
 bun run build
 ```
 
-- `bun run dev` starts the sample app in `playground/`.
-- `bun run lint` runs Oxlint.
-- `bun run fmt` formats the repo with Oxfmt.
-- `bun run fmt:check` checks formatting without writing.
-- `bun run test` runs the integration test against the playground app.
+- `dev`：启动 `playground/`
+- `lint`：运行 Oxlint
+- `fmt` / `fmt:check`：使用 Oxfmt 进行格式化
+- `test`：执行集成测试
