@@ -237,6 +237,7 @@ The playground demonstrates:
 - `open(modalName, { props })`
 - emitting a typed result payload from `close`
 - the generated modal-name convention from nested `app/modals` paths
+- Tailwind CSS v4 styling wired through the playground's Nuxt config
 
 ## Module options
 
