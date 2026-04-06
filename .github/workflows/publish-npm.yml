@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write
+  packages: write
 
 concurrency:
   group: npm-publish
@@ -29,7 +29,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.14.0
-          registry-url: https://registry.npmjs.org
+          registry-url: https://npm.pkg.github.com
+          scope: "@henry753951"
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -41,5 +42,7 @@ jobs:
           bunx nuxi typecheck playground
           bun run build
 
-      - name: Publish to npm
-        run: npm publish --access public
+      - name: Publish to GitHub Packages
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

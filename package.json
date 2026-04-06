@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-imperative-modals",
+  "name": "@henry753951/nuxt-imperative-modals",
   "version": "0.1.0",
   "description": "Imperative modal orchestration for Nuxt with generated modal prop and emit types.",
   "homepage": "https://github.com/henry753951/nuxt-imperative-modals#readme",
@@ -60,5 +60,8 @@
     "nuxt": "^3.17.0 || ^4.0.0",
     "vue": "^3.4.0"
   },
-  "packageManager": "bun@1.3.0"
+  "packageManager": "bun@1.3.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }

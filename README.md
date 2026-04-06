@@ -1,4 +1,4 @@
-# nuxt-imperative-modals
+# @henry753951/nuxt-imperative-modals
 
 [English](README.md) | [Chinese](README_zh-CN.md) | [Traditional Chinese](README_zh-Hant.md)
 
@@ -17,14 +17,20 @@ Imperative modal orchestration for Nuxt. The module scans `app/modals`, register
 ## Install
 
 ```bash
-bun add nuxt-imperative-modals
+bun add @henry753951/nuxt-imperative-modals
+```
+
+If you install from GitHub Packages, add an `.npmrc` entry first:
+
+```ini
+@henry753951:registry=https://npm.pkg.github.com
 ```
 
 Then register the module in `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-   modules: ["nuxt-imperative-modals"],
+   modules: ["@henry753951/nuxt-imperative-modals"],
 });
 ```
 
@@ -250,7 +256,7 @@ The playground demonstrates:
 
 ```ts
 export default defineNuxtConfig({
-   modules: ["nuxt-imperative-modals"],
+   modules: ["@henry753951/nuxt-imperative-modals"],
    imperativeModals: {
       dir: "app/modals",
       componentPrefix: "Modals",
